@@ -2,14 +2,16 @@
 import random, csv
 from psychopy import visual, event, core, data, gui, misc
 import numpy as np
-import Instructions, AnchorTask, LDTask, SpanTask, ImageReelTask, ImageQuestionTask
+import Instructions, AnchorTask, CIDTask, SpanTask, ImageReelTask, ImageQuestionTask
   
 # some variables
 interTaskTime = 3
 interTaskTime2 = 6
 
 resolution = (1600,900)
-resolution = (1200,600)
+resolution = (800,450)
+set_fullscr = False
+debug = True
 
 responses = ['yes','no']
 taskAnchors = [['15'],['2','25'],['5','85']]
@@ -30,15 +32,19 @@ units = [' metres',
          ' kilograms']
          
 # Admin
-expInfo = {'date':data.getDateStr(),'ID':'1','gender':['male','female','other'],'age':'17','native language':['','English','other']}
+expInfo = {'date':data.getDateStr(),'ID':1,'gender':['male','female','other'],'age':17,'native language':['','English','other']}
 
 #present a dialogue to change params
 ok = False
 while(not ok):
+    expInfo = {'date':data.getDateStr(),'ID':1,'gender':['male','female','other'],'age':17,'native language':['','English','other']}
     dlg = gui.DlgFromDict(expInfo, title='Experiment', fixed=['date'],order=['date','ID','gender','age'])
     if dlg.OK:
         misc.toFile('lastParams.pickle', expInfo)#save params to file for next time
-        ok = True
+        if expInfo['native language'] != "":
+            ok = True
+        else:
+            dlg.OK = False
     else:
         core.quit()#the user hit cancel so exit
 
@@ -61,6 +67,8 @@ else:
 
 anchors = [taskAnchors[0],taskAnchors[1][int(result['E1anchor']) - 1],taskAnchors[2][int(result['E2anchor']) - 1]]
 imageFolders = [folderNames[0],folderNames[1],folderNames[2][int(result['E1anchor']) - 1]]
+imageFolders = [folderNames[0],folderNames[1][int(result['E1anchor']) - 1],folderNames[2]]
+print imageFolders
 
 for i in [1,2]:
     comparativeQuestions[i] = comparativeQuestions[i].replace('[anchor]',anchors[i])
@@ -73,7 +81,7 @@ dataFile.write('taskOrder = ' + str(taskOrder) + "; responses (Q,P) = " + str(re
 dataFile.close()
 
 #create a window to draw in
-myWin =visual.Window(resolution, allowGUI=False, bitsMode=None, units='norm', color=(0,0,0), fullscr = True)
+myWin = visual.Window(resolution, winType='pyglet',allowGUI=False,units='norm', color=(0,0,0), fullscr = set_fullscr)
 
 instructions = visual.TextStim(myWin,pos=[0,0],text="",height=.08,alignHoriz='center',wrapWidth=1.2)
 CIDtext = 'Place your index fingers on the space bar now. \n\n Respond as soon as you recognize the word.'
@@ -95,8 +103,12 @@ txt = 'This is the end of the second round of tasks. There will be one more roun
 txt += 'Take a short break if you want to. Press any key to continue to the next block of the experiment.'
 BetweenText.append(txt)
 
+print "checkpoint 1"
+
 instr = Instructions.Instructions(myWin,responses)
 instr.Run()
+
+print "checkpoint 2"
 
 for tsk in range(3):
     if tsk == 1:
@@ -130,7 +142,7 @@ for tsk in range(3):
         core.wait(interTaskTime-.5)
         myWin.flip()
         core.wait(0.5)
-    task = CIDTask.Task(myWin,fileName,tsk+1,taskOrder[tsk],responses)
+    task = CIDTask.Task(myWin,fileName,tsk+1,taskOrder[tsk],responses,debug)
     task.Run()
     core.wait(interTaskTime-.5)
     myWin.flip()

@@ -23,28 +23,32 @@ class Instructions():
         instructionText.append(txt)
         
         txt = 'A more modern method implicitly assesses general knowledge by analysing how '
-        txt += 'quickly people discriminate words from non-words.\n\n'
+        txt += 'quickly people recognize words.\n\n'
         instructionText.append(txt)
         
-        txt = 'Collections of letters will be presented on the screen and, using '
-        txt += 'the Q and P keys on the keyboard, you should indicate whether the collection of letters has meaning for an '
-        txt += 'English speaking person.\n\n'
-        txt += 'Please answer these questions as quickly and accurately as possible.'
+        txt = 'Words will be flashed on the screen for increasing durations, '
+        txt += 'and by pressing the space bar, you should indicate as soon as '
+        txt += 'you recognize the word presented on the screen.\n\n'
+        txt += 'Thereafter, you will be asked to type in the word you saw. '
+        txt += 'Please answer these questions as quickly and accurately as possible. '
+        txt += 'If you do not recognize the word on time, or are unable to type '
+        txt += 'the word correctly, you will have to wait 10 seconds until you '
+        txt += 'can proceed to the next trial.'
         instructionText.append(txt)
         
-        txt = 'The question is "DOES IT HAVE MEANING?"\n\n'
-        txt += 'The Q key corresponds to "' + responses[0] + '" and the P key to "' + responses[1] + '".\n\n'
+        #txt = 'The question is "DOES IT HAVE MEANING?"\n\n'
+        #txt += 'The Q key corresponds to "' + responses[0] + '" and the P key to "' + responses[1] + '".\n\n'
         
-        txt += 'For example, STEAVES does not have meaning, whilst AMAZING does (as it is a word). In addition, although they are '
-        txt += 'proper nouns, LONDON, COLGATE, ALDI, IKEA and KIT-KAT also mean something to an English speaking person.\n\n'
+        #txt += 'For example, STEAVES does not have meaning, whilst AMAZING does (as it is a word). In addition, although they are '
+        #txt += 'proper nouns, LONDON, COLGATE, ALDI, IKEA and KIT-KAT also mean something to an English speaking person.\n\n'
 
-        txt += 'Further example answers are given below:\n'
-        txt += 'BRICK\t\tYES  (it is a word)\n'
-        txt += 'DOLPIP\t\tNO\n'
-        txt += 'EXCEED\t\tYES (it is a word)\n'
-        txt += 'FACEBOOK\t\tYES (it is a social networking website)\n'
-        txt += 'GRESDOR\t\tNO'
-        instructionText.append(txt)
+        #txt += 'Further example answers are given below:\n'
+        #txt += 'BRICK\t\tYES  (it is a word)\n'
+        #txt += 'DOLPIP\t\tNO\n'
+        #txt += 'EXCEED\t\tYES (it is a word)\n'
+        #txt += 'FACEBOOK\t\tYES (it is a social networking website)\n'
+        #txt += 'GRESDOR\t\tNO'
+        #instructionText.append(txt)
         
         txt = 'Between sets of general knowledge tasks, you will be asked to memorize short sequences of consonants and sometimes a series of images. '
         instructionText.append(txt)
@@ -73,6 +77,8 @@ class Instructions():
         #pause until there's a keypress
         event.waitKeys()
         # the following will loop through the instructionText array
+        
+        print "checkpoint 1.4"
         
         for i in range(len(self.instructionText)):
             self.instructions.setText(self.instructionText[i])
