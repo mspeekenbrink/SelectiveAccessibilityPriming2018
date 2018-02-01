@@ -8,28 +8,28 @@ import Instructions, AnchorTask, CIDTask, SpanTask, ImageReelTask, ImageQuestion
 interTaskTime = 3
 interTaskTime2 = 6
 
-debug = False
-set_fullscr = True
+debug = False #True
+set_fullscr = Tre #False
 resolution = (1600,900)
 #resolution = (800,450)
 
 responses = ['yes','no']
-taskAnchors = [['15'],['2','25'],['5','85']]
+taskAnchors = [['15'],['2','25'],['13,000','200,000']]
 folderNames = [[''],['winter','summer'],['']]
 comparativeQuestions = ['Is Big Ben taller or shorter than 15 meters high?',
                         u'Is the annual average temperature in the UK higher or lower than [anchor]\u00B0?',
-                        'Is the average weight of a dog greater or less than [anchor] kilograms?']
+                        u'Is the average price of a new car in the UK higher or lower than \u00A3[anchor]?']
                         
 comparativeOptions = [['taller','shorter'],
                    ['higher','lower'],
-                   ['greater','less']]
+                   ['higher','lower']]
                    
 absoluteQuestions = ['How tall is Big Ben?',
                      'What is the annual average temperature in the UK?',
-                     'What is the average weight of a dog?']
+                     'What is the average price of a new car in the UK?']
 units = [' metres',
          u'\u00B0C',
-         ' kilograms']
+         u'\u00A3']
          
 # Admin
 expInfo = {'date':data.getDateStr(),'ID':1,'gender':['male','female','other'],'age':17,'native language':['','English','other']}
@@ -68,7 +68,6 @@ else:
 anchors = [taskAnchors[0],taskAnchors[1][int(result['E1anchor']) - 1],taskAnchors[2][int(result['E2anchor']) - 1]]
 #imageFolders = [folderNames[0],folderNames[1],folderNames[2][int(result['E1anchor']) - 1]]
 imageFolders = [folderNames[0],folderNames[1][int(result['E1anchor']) - 1],folderNames[2]]
-print imageFolders
 
 for i in [1,2]:
     comparativeQuestions[i] = comparativeQuestions[i].replace('[anchor]',anchors[i])
