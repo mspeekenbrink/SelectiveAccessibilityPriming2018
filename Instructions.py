@@ -78,8 +78,6 @@ class Instructions():
         event.waitKeys()
         # the following will loop through the instructionText array
         
-        print "checkpoint 1.4"
-        
         for i in range(len(self.instructionText)):
             self.instructions.setText(self.instructionText[i])
             self.instructions.draw()

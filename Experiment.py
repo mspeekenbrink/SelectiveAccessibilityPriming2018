@@ -8,10 +8,10 @@ import Instructions, AnchorTask, CIDTask, SpanTask, ImageReelTask, ImageQuestion
 interTaskTime = 3
 interTaskTime2 = 6
 
+debug = False
+set_fullscr = True
 resolution = (1600,900)
-resolution = (800,450)
-set_fullscr = False
-debug = True
+#resolution = (800,450)
 
 responses = ['yes','no']
 taskAnchors = [['15'],['2','25'],['5','85']]
@@ -66,7 +66,7 @@ else:
     taskOrder = [1,2,3]
 
 anchors = [taskAnchors[0],taskAnchors[1][int(result['E1anchor']) - 1],taskAnchors[2][int(result['E2anchor']) - 1]]
-imageFolders = [folderNames[0],folderNames[1],folderNames[2][int(result['E1anchor']) - 1]]
+#imageFolders = [folderNames[0],folderNames[1],folderNames[2][int(result['E1anchor']) - 1]]
 imageFolders = [folderNames[0],folderNames[1][int(result['E1anchor']) - 1],folderNames[2]]
 print imageFolders
 
@@ -90,7 +90,7 @@ SpanText = "You will now be shown letters one at a time. Please memorize them an
 ImageReelText = "You will now be shown a number of images. Please look carefully at them and keep them in mind as you will be asked questions about them later."
 
 BetweenText = []
-txt = 'This is the end of the first round of tasks. There will be two more rounds just like this one. \n\n '
+txt = 'This is the end of the first round of tasks. There will be two more rounds just like this one. \n\n'
 #txt += 'In the "DOES IT HAVE MEANING?" task, please respond as quickly as possible. '
 #txt += '\n\nThe Q key will always correspond to "' + responses[0] 
 #txt += '" and the P key to "' + responses[1] + '". Make sure your index fingers rest on these keys.\n\n'
@@ -103,12 +103,8 @@ txt = 'This is the end of the second round of tasks. There will be one more roun
 txt += 'Take a short break if you want to. Press any key to continue to the next block of the experiment.'
 BetweenText.append(txt)
 
-print "checkpoint 1"
-
 instr = Instructions.Instructions(myWin,responses)
 instr.Run()
-
-print "checkpoint 2"
 
 for tsk in range(3):
     if tsk == 1:

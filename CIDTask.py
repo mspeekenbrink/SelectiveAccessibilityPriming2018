@@ -110,6 +110,8 @@ class Task:
             while identification == False and cycleN < 16:
                 # each cycle consists of 30 frames (500 ms on a 60 Hz monitor)
                 for frameN in range(15):#for exactly 200 frames
+                    if identification:
+                        break
                     if frameN < cycleN:  # present fixation for a subset of frames
                         self.Stimulus.draw()
                     else:  # present stim for a different subset
