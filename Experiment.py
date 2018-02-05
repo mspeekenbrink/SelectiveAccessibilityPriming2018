@@ -10,7 +10,8 @@ interTaskTime2 = 6
 
 debug = False #True
 set_fullscr = True #False
-resolution = (1600,900)
+resolution = (1920,1200)
+#resolution = (1600,900)
 #resolution = (800,450)
 
 responses = ['yes','no']
