@@ -112,8 +112,9 @@ for tsk in range(3):
         instructions.draw()
         myWin.flip()
         event.waitKeys()
-        core.wait(interTaskTime-.5)
         myWin.flip()
+        #core.wait(interTaskTime-.5)
+        #myWin.flip()
         core.wait(0.5)
         task = ImageReelTask.Task(myWin,"Files/images/" + imageFolders[taskOrder[tsk]-1])
     else:
