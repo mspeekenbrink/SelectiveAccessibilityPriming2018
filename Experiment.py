@@ -9,7 +9,7 @@ interTaskTime = 3
 interTaskTime2 = 6
 
 debug = False #True
-set_fullscr = Tre #False
+set_fullscr = True #False
 resolution = (1600,900)
 #resolution = (800,450)
 
@@ -86,16 +86,16 @@ instructions = visual.TextStim(myWin,pos=[0,0],text="",height=.08,alignHoriz='ce
 CIDtext = 'Place your index fingers on the space bar now. \n\n Respond as soon as you recognize the word.'
 CIDtext2 = 'Place your index fingers on the space bar now. \n\n Respond as soon as you recognize the word.'
 SpanText = "You will now be shown letters one at a time. Please memorize them and recall them in order when asked."
-ImageReelText = "You will now be shown a number of images. Please look carefully at them and keep them in mind as you will be asked questions about them later."
+ImageReelText = "You will now be shown a number of images. Please look carefully at them and keep them in mind. You will later be asked questions relating to the season depicted."
 
 BetweenText = []
-txt = 'This is the end of the first round of tasks. There will be two more rounds just like this one. \n\n'
+txt = 'This is the end of the first round of tasks. There will be two more rounds like this one. \n\n'
 #txt += 'In the "DOES IT HAVE MEANING?" task, please respond as quickly as possible. '
 #txt += '\n\nThe Q key will always correspond to "' + responses[0] 
 #txt += '" and the P key to "' + responses[1] + '". Make sure your index fingers rest on these keys.\n\n'
 txt += 'Take a short break if you want to. Press any key to continue to the next block of the experiment.'
 BetweenText.append(txt)
-txt = 'This is the end of the second round of tasks. There will be one more rounds just like this one. \n\n'
+txt = 'This is the end of the second round of tasks. There will be one more round like this one. \n\n'
 #txt += 'In the "DOES IT HAVE MEANING?" task, please respond as quickly as possible. '
 #txt += '\n\nThe Q key will always correspond to "' + responses[0] 
 #txt += '" and the P key to "' + responses[1] + '". Make sure your index fingers rest on these keys.\n\n'
@@ -123,6 +123,11 @@ for tsk in range(3):
     else:
         task = AnchorTask.Task(myWin,fileName,tsk+1,comparativeQuestions[taskOrder[tsk]-1],units[taskOrder[tsk]-1],comparativeOptions[taskOrder[tsk]-1],1)
     task.Run()
+    if tsk == 1:
+        core.wait(.5)
+        which = "season"
+        task = ImageQuestionTask.Task(myWin,fileName,tsk+1,which,imageFolders[taskOrder[tsk]-1])
+        task.Run()
     if tsk == 0:
         instructions.setText(CIDtext)
     else:
@@ -142,12 +147,9 @@ for tsk in range(3):
     core.wait(interTaskTime-.5)
     myWin.flip()
     core.wait(0.5)
-    if tsk == 1:
-        which = "season"
-        task = ImageQuestionTask.Task(myWin,fileName,tsk+1,which,imageFolders[taskOrder[tsk]-1])
-    else:
+    if tsk != 1:
         task = AnchorTask.Task(myWin,fileName,tsk+1,absoluteQuestions[taskOrder[tsk]-1],units[taskOrder[tsk]-1],comparativeOptions[taskOrder[tsk]-1],2)
-    task.Run()
+        task.Run()
     if tsk < 2:
         instructions.setText(SpanText)
         instructions.draw()
