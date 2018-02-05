@@ -86,16 +86,16 @@ instructions = visual.TextStim(myWin,pos=[0,0],text="",height=.08,alignHoriz='ce
 CIDtext = 'Place your index fingers on the space bar now. \n\n Respond as soon as you recognize the word.'
 CIDtext2 = 'Place your index fingers on the space bar now. \n\n Respond as soon as you recognize the word.'
 SpanText = "You will now be shown letters one at a time. Please memorize them and recall them in order when asked."
-ImageReelText = "You will now be shown a number of images. Please look carefully at them and keep them in mind. You will later be asked questions relating to the season depicted."
+ImageReelText = "You will now be shown a number of images. Please look carefully at them and keep them in mind. You will later be asked questions relating to the season depicted. \n \n Press any key to continue."
 
 BetweenText = []
-txt = 'This is the end of the first round of tasks. There will be two more rounds like this one. \n\n'
+txt = 'This is the end of the first round of tasks. There will be two more rounds similar to this one. \n\n'
 #txt += 'In the "DOES IT HAVE MEANING?" task, please respond as quickly as possible. '
 #txt += '\n\nThe Q key will always correspond to "' + responses[0] 
 #txt += '" and the P key to "' + responses[1] + '". Make sure your index fingers rest on these keys.\n\n'
 txt += 'Take a short break if you want to. Press any key to continue to the next block of the experiment.'
 BetweenText.append(txt)
-txt = 'This is the end of the second round of tasks. There will be one more round like this one. \n\n'
+txt = 'This is the end of the second round of tasks. There will be one more round similar to this one. \n\n'
 #txt += 'In the "DOES IT HAVE MEANING?" task, please respond as quickly as possible. '
 #txt += '\n\nThe Q key will always correspond to "' + responses[0] 
 #txt += '" and the P key to "' + responses[1] + '". Make sure your index fingers rest on these keys.\n\n'
@@ -111,14 +111,10 @@ for tsk in range(3):
         instructions.setText(ImageReelText)
         instructions.draw()
         myWin.flip()
-        if tsk == 2:
-            core.wait(interTaskTime2-.5)
-            myWin.flip()
-            core.wait(0.5)
-        else:
-            core.wait(interTaskTime-.5)
-            myWin.flip()
-            core.wait(0.5)
+        event.waitKeys()
+        core.wait(interTaskTime-.5)
+        myWin.flip()
+        core.wait(0.5)
         task = ImageReelTask.Task(myWin,"Files/images/" + imageFolders[taskOrder[tsk]-1])
     else:
         task = AnchorTask.Task(myWin,fileName,tsk+1,comparativeQuestions[taskOrder[tsk]-1],units[taskOrder[tsk]-1],comparativeOptions[taskOrder[tsk]-1],1)
