@@ -37,7 +37,7 @@ class Task:
                 if trial == 2:
                     qst = "Thinking about the pictures you saw, on a day like those shown, what temperature is it? (in degrees Celcius)"
                 if trial == 3:
-                    qst = "Thinking about the pictures you saw, describe in a short sentence (e.g. 6 words) what a person might do on a day like those."
+                    qst = "Thinking about the pictures you saw, describe what you might do on a day like those."
             if self.which == "cars":
                 if trial == 1:
                     qst = "Thinking about the pictures you saw, what type of car describes these best? (type 1 for luxury, 2 for economy, 3 for people carrier, 4 for commercial)"
